@@ -38,7 +38,7 @@ func (df *DataFrame) ToCSV(filename string) error {
 
 	layers := strings.Split(filename, "/")
 	if len(layers) > 1 {
-		os.MkdirAll(strings.Join(layers[:len(layers)-1], "/"), 0444)
+		os.MkdirAll(strings.Join(layers[:len(layers)-1], "/"), 0755)
 	}
 	f, err := os.Create(filename)
 	if err != nil {
