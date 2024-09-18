@@ -1,4 +1,4 @@
-package dataframe
+package go_df
 
 type DataFrame struct {
 	Cols []string

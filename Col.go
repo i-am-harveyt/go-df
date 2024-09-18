@@ -1,4 +1,4 @@
-package dataframe
+package go_df
 
 type Type int
 
