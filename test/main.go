@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	dataframe "go_df"
+	dataframe "github.com/i-am-harveyt/go_df"
 )
 
 func main() {
