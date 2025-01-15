@@ -1,6 +1,6 @@
 package go_df
 
-type Type int
+type DataType int
 
 const (
 	Bool = iota
@@ -11,7 +11,7 @@ const (
 
 type Col struct {
 	Name string
-	Type Type
+	Type DataType
 	Data []interface{}
 }
 
@@ -19,6 +19,6 @@ func (c *Col) Len() int {
 	return len(c.Data)
 }
 
-func (c *Col) Get(i int) interface{} {
+func (c *Col) Get(i uint) interface{} {
 	return c.Data[i]
 }
