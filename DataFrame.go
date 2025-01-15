@@ -1,5 +1,10 @@
 package go_df
 
+import (
+	"fmt"
+	"strings"
+)
+
 type DataFrame struct {
 	Cols []string
 	Data map[string]*Col
@@ -34,22 +39,16 @@ func (df *DataFrame) OverwriteCols(cols []string) {
 	}
 }
 
-func (df *DataFrame) GetBool(col string, idx int) bool {
-	data := df.Data[col].Get(idx)
-	return data.(bool)
-}
-
-func (df *DataFrame) GetInt(col string, idx int) int {
-	data := df.Data[col].Get(idx)
-	return data.(int)
-}
-
-func (df *DataFrame) GetFloat64(col string, idx int) float64 {
-	data := df.Data[col].Get(idx)
-	return data.(float64)
-}
-
-func (df *DataFrame) GetString(col string, idx int) string {
-	data := df.Data[col].Get(idx)
-	return data.(string)
+func (df *DataFrame) PrintHead(rows uint) {
+	fmt.Printf("| %v |\n", strings.Join(df.Cols, "|"))
+	for i := range rows {
+		row := []string{}
+		for _, name := range df.Cols {
+			row = append(
+				row,
+				fmt.Sprint(df.Get(name, i)),
+			)
+		}
+		fmt.Printf("| %v |\n", strings.Join(row, "|"))
+	}
 }

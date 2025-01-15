@@ -3,13 +3,15 @@ package main
 import (
 	"fmt"
 
-	"github.com/i-am-harveyt/go_df"
+	"github.com/i-am-harveyt/go-df"
 )
 
 func main() {
 	filename := "test.csv"
-	_, err := go_df.FromCSV(filename)
+	f, err := go_df.FromCSV(filename)
 	if err != nil {
 		panic(fmt.Sprintf("CSV not exist: %v\n", filename))
 	}
+	f.PrintHead(5)
+	f.ToCSV("output.csv")
 }
