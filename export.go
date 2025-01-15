@@ -15,11 +15,7 @@ func (df *DataFrame) ToCSV(filename string) error {
 	}
 
 	// header
-	headers := []string{}
-	for _, headerCol := range df.Cols {
-		headers = append(headers, headerCol)
-	}
-	out = append(out, strings.Join(headers, ","))
+	out = append(out, strings.Join(df.Cols, ","))
 
 	// data
 	for r := range shape[0] {
