@@ -47,9 +47,7 @@ func FromCSV(filepath string) (*DataFrame, error) {
 	headers := strings.Split(scanner.Text(), ",")
 	df.OverwriteCols(headers)
 	for _, col := range df.Cols {
-		df.Data[col] = &Col{
-			Name: col,
-		}
+		df.Data[col] = &Col{Name: col}
 	}
 
 	// data
@@ -71,7 +69,7 @@ func FromCSV(filepath string) (*DataFrame, error) {
 				col.Data = append(col.Data, v)
 			} else {
 				col.Type = String
-				col.Data = append(col.Data, cell)
+				col.Data = append(col.Data, strings.Trim(cell, "\""))
 			}
 		}
 	}
