@@ -7,14 +7,14 @@ import (
 	"strings"
 )
 
-func FromMap(map_ *map[string][]interface{}) *DataFrame {
+func FromMap(map_ *map[string][]Element) *DataFrame {
 	df := DataFrame{
 		Cols: []string{},
-		Data: map[string]*Col{},
+		Data: map[string]*Series{},
 	}
 	for k, v := range *map_ {
 		df.Cols = append(df.Cols, k)
-		df.Data[k] = &Col{
+		df.Data[k] = &Series{
 			Name: k,
 			Data: v,
 		}
@@ -37,6 +37,7 @@ func FromCSV(filepath string) (*DataFrame, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer f.Close()
 	scanner := bufio.NewScanner(f)
 	scanner.Split(bufio.ScanLines)
 
@@ -47,7 +48,7 @@ func FromCSV(filepath string) (*DataFrame, error) {
 	headers := strings.Split(scanner.Text(), ",")
 	df.OverwriteCols(headers)
 	for _, col := range df.Cols {
-		df.Data[col] = &Col{Name: col}
+		df.Data[col] = &Series{Name: col}
 	}
 
 	// data
